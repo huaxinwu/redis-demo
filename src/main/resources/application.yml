@@ -1,0 +1,26 @@
+# 端口
+server:
+  port: 8888
+  servlet:
+    context-path: /dubbo-demo
+spring:
+# redis config
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    # 默认2000毫秒
+    timeout: 10000
+    database: 1
+# datasource config
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_boot
+    username: root
+    password: 123456
+# jpa config
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
