@@ -3,6 +3,7 @@ package com.example.demo.utils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -30,14 +31,14 @@ public class DateUtils {
     /**
      *  定义一个下午3点的时间对象
      */
-    final  DateTime DISTRIBUTION_TIME_SPLIT_TIME = new DateTime().withTime(15,0,0,0);
+    static final  DateTime DISTRIBUTION_TIME_SPLIT_TIME = new DateTime().withTime(15,0,0,0);
 
     /**
      * 根据下单时间计算分布时间
      * @param orderCreateTime 下单时间
      * @return Date 时间对象
      */
-    public  Date calculateDistributionTimeByOrderCreateTime(Date orderCreateTime){
+    public static  Date calculateDistributionTimeByOrderCreateTime(Date orderCreateTime){
         DateTime orderCreateDateTime = new DateTime(orderCreateTime);
         Date tomorrow = orderCreateDateTime.plusDays(1).toDate();
         Date theDayAfterTomorrow = orderCreateDateTime.plusDays(2).toDate();
@@ -49,11 +50,15 @@ public class DateUtils {
      * @param distributionTime 分布时间
      * @return Date 时间对象
      */
-    public  Date wrapDistributionTime(Date distributionTime){
+    public static  Date wrapDistributionTime(Date distributionTime){
         DateTime currentDistributionDateTime = new DateTime(distributionTime);
         DateTime plusOneDay = currentDistributionDateTime.plusDays(1);
         boolean isSunday = (DateTimeConstants.SUNDAY == currentDistributionDateTime.getDayOfWeek());
         return isSunday ? plusOneDay.toDate() : currentDistributionDateTime.toDate() ;
+    }
+
+    public static void main(String[] args) {
+        DateUtils.calculateDistributionTimeByOrderCreateTime(Calendar.getInstance().getTime());
     }
 
 }
